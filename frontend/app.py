@@ -31,8 +31,8 @@ product_data = {
 
 if st.button("Predict", type="primary"):
     try:
-        response = requests.post("https://super-zebra-4jg5q4rg4w937v49-7860.app.github.dev/v1/predict", json=product_data, timeout=30)
-        st.write("URL called:", "https://super-zebra-4jg5q4rg4w937v49-7860.app.github.dev/v1/predict")
+        response = requests.post("http://backend/v1/predict", json=product_data, timeout=30)
+        st.write("URL called:", "http://backend/v1/predict")
         st.write("Status:", response.status_code)
         st.write("Content-Type:", response.headers.get("Content-Type"))
         st.code(response.text[:1000])
