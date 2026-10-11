@@ -30,7 +30,7 @@ product_data = {
 }
 
 if st.button("Predict", type='primary'):
-    response = requests.post("https://chinmayrozekar-SuperKartAPI.hf.space/v1/predict", json=product_data)
+    response = requests.post("https://super-zebra-4jg5q4rg4w937v49-7860.app.github.dev/v1/predict", json=product_data)
     if response.status_code == 200:
         result = response.json()
         predicted_sales = result["Sales"]
