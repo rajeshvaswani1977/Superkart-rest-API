@@ -31,8 +31,8 @@ product_data = {
 
 if st.button("Predict", type="primary"):
     try:
-        response = requests.post("http://backend/v1/predict", json=product_data, timeout=30)
-        st.write("URL called:", "http://backend/v1/predict")
+        response = requests.post("http://superkart-backend:7860/v1/predict", json=product_data, timeout=30)
+        st.write("URL called:", "http://superkart-backend:7860/v1/predict")
         st.write("Status:", response.status_code)
         st.write("Content-Type:", response.headers.get("Content-Type"))
         st.code(response.text[:1000])
