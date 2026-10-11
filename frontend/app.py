@@ -1,7 +1,7 @@
 
 import streamlit as st
 import requests
-
+API_URL = os.getenv("API_URL", "http://backend:7860/v1/predict")
 st.title("SuperKart Sales Prediction App")
 
 # Input fields for product and store data
@@ -30,9 +30,10 @@ product_data = {
 }
 
 if st.button("Predict", type="primary"):
+    st.write("URL called:", API_URL)
     try:
-        response = requests.post("http://superkart-backend:7860/v1/predict", json=product_data, timeout=30)
-        st.write("URL called:", "http://superkart-backend:7860/v1/predict")
+        response = requests.post(API_URL, json=product_data, timeout=30)
+        st.write("URL called:", API_URL)
         st.write("Status:", response.status_code)
         st.write("Content-Type:", response.headers.get("Content-Type"))
         st.code(response.text[:1000])
