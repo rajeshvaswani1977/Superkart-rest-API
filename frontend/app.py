@@ -29,11 +29,18 @@ product_data = {
     "Product_Type_Category": Product_Type_Category
 }
 
-if st.button("Predict", type='primary'):
-    response = requests.post("https://super-zebra-4jg5q4rg4w937v49-7860.app.github.dev/v1/predict", json=product_data)
-    if response.status_code == 200:
-        result = response.json()
-        predicted_sales = result["Sales"]
-        st.write(f"Predicted Product Store Sales Total: ₹{predicted_sales:.2f}")
-    else:
-        st.error("Error in API request")
+if st.button("Predict", type="primary"):
+    try:
+        response = requests.post("https://super-zebra-4jg5q4rg4w937v49-7860.app.github.dev/v1/predict", json=product_data, timeout=30)
+        st.write("URL called:", "https://super-zebra-4jg5q4rg4w937v49-7860.app.github.dev/v1/predict")
+        st.write("Status:", response.status_code)
+        st.write("Content-Type:", response.headers.get("Content-Type"))
+        st.code(response.text[:1000])
+
+        if response.status_code == 200 and "application/json" in response.headers.get("Content-Type", ""):
+            result = response.json()
+            st.success(f"Predicted Product Store Sales Total: ₹{result['Sales']:.2f}")
+        else:
+            st.error("The API did not return JSON. See the raw response above.")
+    except requests.exceptions.RequestException as e:
+        st.error(f"Could not reach the API: {e}")
