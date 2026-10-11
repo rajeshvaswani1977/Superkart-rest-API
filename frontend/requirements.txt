@@ -1,4 +1,3 @@
 pandas==2.2.2
 requests==2.32.4
 streamlit==1.45.0
-Writing frontend/requirements.txt
